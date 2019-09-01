@@ -1,13 +1,6 @@
 body {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+  font-family: "Open Sans", "Segoe UI", sans-serif;
 }
 .App {
-  &,
-  * {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
+  @import "login";
 }
