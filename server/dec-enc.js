@@ -7,3 +7,8 @@ const claims = {
 };
 
 const key = "$PraveenIsAwesome!";
+
+const header = {
+  alg: "HS512",
+  typ: "JWT"
+};
