@@ -11,13 +11,21 @@ const welcomeMessage =
 app.get("/", (req, res) => res.send(welcomeMessage));
 
 app.post("/api/GenerateJWT", (req, res) => {
-  res.json(GenerateJWT(req.body.header, req.body.claims, req.body.key));
+  let { header, claims, key } = req.body;
+  // In case, due to security reasons, if the client doesn't send a key,
+  // use our default key.
+  key = key || "$PraveenIsAwesome!";
+  res.json(GenerateJWT(header, claims, key));
 });
 app.post("/api/DecodeJWT", (req, res) => {
   res.json(DecodeJWT(req.body.sJWS));
 });
 app.post("/api/ValidateJWT", (req, res) => {
-  res.json(ValidateJWT(req.body.header, req.body.token, req.body.key));
+  let { header, token, key } = req.body;
+  // In case, due to security reasons, if the client doesn't send a key,
+  // use our default key.
+  key = key || "$PraveenIsAwesome!";
+  res.json(ValidateJWT(header, token, key));
 });
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
