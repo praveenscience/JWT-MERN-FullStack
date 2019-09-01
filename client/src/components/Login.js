@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 
 class Login extends Component {
+  state = {
+    Username: "",
+    Password: ""
+  };
   render() {
     return (
       <div className="login">
@@ -15,21 +19,20 @@ class Login extends Component {
                   </h6>
                   <form>
                     <div className="form-group">
-                      <label for="exampleInputEmail1">Email address</label>
+                      <label htmlFor="Username">Username</label>
                       <input
-                        type="email"
+                        type="Username"
                         className="form-control"
-                        id="exampleInputEmail1"
-                        aria-describedby="emailHelp"
-                        placeholder="Enter email"
+                        id="Username"
+                        placeholder="Username"
                       />
                     </div>
                     <div className="form-group">
-                      <label for="exampleInputPassword1">Password</label>
+                      <label htmlFor="Password">Password</label>
                       <input
                         type="password"
                         className="form-control"
-                        id="exampleInputPassword1"
+                        id="Password"
                         placeholder="Password"
                       />
                     </div>
@@ -41,7 +44,12 @@ class Login extends Component {
               </div>
             </div>
             <div className="col-6">
-              <pre>State Data</pre>
+              <pre>
+                State Data
+                <br />
+                <br />
+                {JSON.stringify(this.state, null, 2)}
+              </pre>
             </div>
           </div>
         </div>
