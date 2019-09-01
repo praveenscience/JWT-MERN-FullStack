@@ -16,3 +16,7 @@ const header = {
 // Stringify the header and payload objects.
 const sHeader = JSON.stringify(header);
 const sPayload = JSON.stringify(claims);
+
+// Generate and log the JWT.
+const sJWT = JSRSASign.jws.JWS.sign("HS512", sHeader, sPayload, key);
+console.log(sJWT);

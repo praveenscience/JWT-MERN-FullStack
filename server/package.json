@@ -4,7 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon server"
+    "start": "nodemon server",
+    "decenc": "nodemon dec-enc"
   },
   "repository": {
     "type": "git",
