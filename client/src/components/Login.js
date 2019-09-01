@@ -6,7 +6,7 @@ class Login extends Component {
       <div className="login">
         <div className="container">
           <div className="row">
-            <div className="col-6 offset-3">
+            <div className="col-6">
               <div className="card">
                 <div className="card-body">
                   <h5 className="card-title">Sign In</h5>
@@ -39,6 +39,9 @@ class Login extends Component {
                   </form>
                 </div>
               </div>
+            </div>
+            <div className="col-6">
+              <pre>State Data</pre>
             </div>
           </div>
         </div>

@@ -1,6 +1,15 @@
 body {
   font-family: "Open Sans", "Segoe UI", sans-serif;
 }
+pre {
+  font-family: "Monaco", "Consolas", monospace;
+  border: 1px solid #ccc;
+  background-color: #f5f5f5;
+  padding: 3px;
+  border-radius: 3px;
+  line-height: 1;
+  height: 100%;
+}
 .App {
   @import "login";
 }
