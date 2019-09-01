@@ -5,3 +5,5 @@ const claims = {
   Age: 27,
   Fullname: "Praveen Kumar"
 };
+
+const key = "$PraveenIsAwesome!";
