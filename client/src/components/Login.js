@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { GenerateJWT } from "../services/JWTService";
 
 class Login extends Component {
   state = {
@@ -19,6 +20,23 @@ class Login extends Component {
     e.preventDefault();
     // We can do something when the button is clicked.
     // Here, we can also call the function that sends a request to the server.
+    // Get the username and password from the state.
+    const { Username, Password } = this.state;
+    const claims = {
+      Username,
+      Password
+    };
+    const header = {
+      alg: "HS512",
+      typ: "JWT"
+    };
+    GenerateJWT(header, claims, null, res => {
+      if (res.status === 200) {
+        this.setState({ Response: res.data });
+      } else {
+        this.setState({ Response: "Error!" });
+      }
+    });
   };
   render() {
     return (
@@ -59,7 +77,24 @@ class Login extends Component {
                 State Data
                 <br />
                 <br />
-                {JSON.stringify(this.state, null, 2)}
+                {JSON.stringify(
+                  {
+                    Username: this.state.Username,
+                    Password: this.state.Password
+                  },
+                  null,
+                  2
+                )}
+                {this.state.Response && (
+                  <>
+                    <br />
+                    <br />
+                    Response Data (JWT)
+                    <br />
+                    <br />
+                    {this.state.Response}
+                  </>
+                )}
               </pre>
             </div>
           </div>
