@@ -5,6 +5,14 @@ class Login extends Component {
     Username: "",
     Password: ""
   };
+  handleChange = e => {
+    // Here, e is the event.
+    // e.target is our element.
+    // All we need to do is to update the current state with the values here.
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
   render() {
     return (
       <div className="login">
@@ -21,19 +29,25 @@ class Login extends Component {
                     <div className="form-group">
                       <label htmlFor="Username">Username</label>
                       <input
-                        type="Username"
+                        type="text"
+                        name="Username"
                         className="form-control"
                         id="Username"
                         placeholder="Username"
+                        value={this.state.Username}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <div className="form-group">
                       <label htmlFor="Password">Password</label>
                       <input
                         type="password"
+                        name="Password"
                         className="form-control"
                         id="Password"
                         placeholder="Password"
+                        value={this.state.Password}
+                        onChange={this.handleChange}
                       />
                     </div>
                     <button type="submit" className="btn btn-success">
