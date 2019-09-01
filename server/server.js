@@ -1,5 +1,5 @@
 const express = require("express");
-const DecEnc = require("./dec-enc.js");
+const { GenerateJWT, DecodeJWT, ValidateJWT } = require("./dec-enc.js");
 const app = express();
 const port = process.env.PORT || 3100;
 
