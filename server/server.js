@@ -1,8 +1,10 @@
 const express = require("express");
+const morgan = require("morgan");
 const { GenerateJWT, DecodeJWT, ValidateJWT } = require("./dec-enc.js");
 
 const app = express();
 app.use(express.json());
+app.use(morgan("dev"));
 const port = process.env.PORT || 3100;
 
 const welcomeMessage =
