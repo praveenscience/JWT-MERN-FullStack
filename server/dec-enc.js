@@ -12,3 +12,7 @@ const header = {
   alg: "HS512",
   typ: "JWT"
 };
+
+// Stringify the header and payload objects.
+const sHeader = JSON.stringify(header);
+const sPayload = JSON.stringify(claims);
