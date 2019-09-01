@@ -13,6 +13,13 @@ class Login extends Component {
       [e.target.name]: e.target.value
     });
   };
+  handleSubmit = e => {
+    // Here, e is the event.
+    // Let's prevent the default submission event here.
+    e.preventDefault();
+    // We can do something when the button is clicked.
+    // Here, we can also call the function that sends a request to the server.
+  };
   render() {
     return (
       <div className="login">
@@ -25,7 +32,7 @@ class Login extends Component {
                   <h6 className="card-subtitle mb-2 text-muted">
                     Please sign in to continue.
                   </h6>
-                  <form>
+                  <form onSubmit={this.handleSubmit}>
                     {["Username", "Password"].map((i, k) => (
                       <div className="form-group" key={k}>
                         <label htmlFor={i}>{i}</label>
