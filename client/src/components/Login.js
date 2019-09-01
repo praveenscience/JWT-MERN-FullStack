@@ -26,30 +26,20 @@ class Login extends Component {
                     Please sign in to continue.
                   </h6>
                   <form>
-                    <div className="form-group">
-                      <label htmlFor="Username">Username</label>
-                      <input
-                        type="text"
-                        name="Username"
-                        className="form-control"
-                        id="Username"
-                        placeholder="Username"
-                        value={this.state.Username}
-                        onChange={this.handleChange}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="Password">Password</label>
-                      <input
-                        type="password"
-                        name="Password"
-                        className="form-control"
-                        id="Password"
-                        placeholder="Password"
-                        value={this.state.Password}
-                        onChange={this.handleChange}
-                      />
-                    </div>
+                    {["Username", "Password"].map((i, k) => (
+                      <div className="form-group" key={k}>
+                        <label htmlFor={i}>{i}</label>
+                        <input
+                          type={i === "Password" ? "password" : "text"}
+                          name={i}
+                          className="form-control"
+                          id={i}
+                          placeholder={i}
+                          value={this.state[i]}
+                          onChange={this.handleChange}
+                        />
+                      </div>
+                    ))}
                     <button type="submit" className="btn btn-success">
                       Submit
                     </button>
