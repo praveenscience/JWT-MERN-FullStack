@@ -10,8 +10,14 @@ const welcomeMessage =
 
 app.get("/", (req, res) => res.send(welcomeMessage));
 
-app.post("/api/GenerateJWT", (req, res) => res.send(""));
-app.post("/api/DecodeJWT", (req, res) => res.send(""));
-app.post("/api/ValidateJWT", (req, res) => res.send(""));
+app.post("/api/GenerateJWT", (req, res) => {
+  res.json(GenerateJWT(req.body.header, req.body.claims, req.body.key));
+});
+app.post("/api/DecodeJWT", (req, res) => {
+  res.json(DecodeJWT(req.body.sJWS));
+});
+app.post("/api/ValidateJWT", (req, res) => {
+  res.json(ValidateJWT(req.body.header, req.body.token, req.body.key));
+});
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
