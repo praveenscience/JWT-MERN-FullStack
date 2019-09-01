@@ -32,3 +32,14 @@ console.log(
     alg: [algorithm]
   })
 );
+
+// Decoding function.
+const aJWT = token.split(".");
+const uHeader = JSRSASign.b64utos(aJWT[0]);
+const uClaim = JSRSASign.b64utos(aJWT[1]);
+
+// Parse and log the untrusted Header and Claim.
+const pHeader = JSRSASign.jws.JWS.readSafeJSONString(uHeader);
+const pClaim = JSRSASign.jws.JWS.readSafeJSONString(uClaim);
+console.log(pHeader);
+console.log(pClaim);
