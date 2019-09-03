@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { GenerateJWT } from "../services/JWTService";
+import { GenerateJWT, DecodeJWT } from "../services/JWTService";
 
 class Login extends Component {
   state = {
@@ -32,7 +32,11 @@ class Login extends Component {
     };
     GenerateJWT(header, claims, null, res => {
       if (res.status === 200) {
-        this.setState({ Response: res.data });
+        this.setState({ Response: res.data }, () => {
+          DecodeJWT(this.state.Response, data =>
+            this.setState({ Data: data.data })
+          );
+        });
       } else {
         this.setState({ Response: "Error!" });
       }
@@ -93,6 +97,16 @@ class Login extends Component {
                     <br />
                     <br />
                     {this.state.Response}
+                  </>
+                )}
+                {this.state.Data && (
+                  <>
+                    <br />
+                    <br />
+                    Decoded Data
+                    <br />
+                    <br />
+                    {JSON.stringify(this.state.Data, null, 2)}
                   </>
                 )}
               </pre>
