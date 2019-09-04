@@ -40,29 +40,48 @@ class Login extends Component {
         // If there's no errors, further check if it's 200.
         if (res.status === 200) {
           // We need a JWT to be returned from the server.
-          // As it stands, it doesn't currently return the JWT, as it's dummy.
-          // Let's work on the server side part now to make it return the JWT.
+          // The res.data holds both Message and JWT. We need the JWT.
+          // Decode the JWT and store it in the state.
+          DecodeJWT(res.data.JWT, data =>
+            // Here, data.data will have the decoded data.
+            this.setState({ Data: data.data })
+          );
+          // Now to persist the login after refresh, store in localStorage.
+          // Check if localstorage support is there.
+          if (typeof Storage !== "undefined") {
+            // Set the JWT to the localStorage.
+            localStorage.setItem("JWT", res.data.JWT);
+          }
         }
       }
     });
   };
   SignOutUser = e => {
+    // Prevent the default event of reloading the page.
     e.preventDefault();
+    // Clear the errors.
     this.setState({ Response: null, Data: null });
+    // Check if localstorage support is there.
     if (typeof Storage !== "undefined") {
-      // When this component loads, check if JWT is already saved in the local storage.
+      // Check if JWT is already saved in the local storage.
       if (localStorage.getItem("JWT") !== null) {
+        // If there's something, remove it.
         localStorage.removeItem("JWT");
       }
     }
   };
   componentDidMount() {
+    // When this component loads, check if JWT is already saved in the local storage.
+    // So, first check if localstorage support is there.
     if (typeof Storage !== "undefined") {
-      // When this component loads, check if JWT is already saved in the local storage.
+      // Check if JWT is already saved in the local storage.
       if (localStorage.getItem("JWT") !== null) {
         // If there's something, try to parse and sign the current user in.
-        this.setState({ Response: localStorage.getItem("JWT") });
+        this.setState({
+          Response: localStorage.getItem("JWT")
+        });
         DecodeJWT(localStorage.getItem("JWT"), data =>
+          // Here, data.data will have the decoded data.
           this.setState({ Data: data.data })
         );
       }
