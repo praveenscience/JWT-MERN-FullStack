@@ -52,31 +52,53 @@ class Login extends Component {
           <div className="row">
             <div className="col-6">
               <div className="card">
-                <div className="card-body">
-                  <h5 className="card-title">Sign In</h5>
-                  <h6 className="card-subtitle mb-2 text-muted">
-                    Please sign in to continue.
-                  </h6>
-                  <form onSubmit={this.handleSubmit}>
-                    {["Username", "Password"].map((i, k) => (
-                      <div className="form-group" key={k}>
-                        <label htmlFor={i}>{i}</label>
-                        <input
-                          type={i === "Password" ? "password" : "text"}
-                          name={i}
-                          className="form-control"
-                          id={i}
-                          placeholder={i}
-                          value={this.state[i]}
-                          onChange={this.handleChange}
-                        />
-                      </div>
-                    ))}
-                    <button type="submit" className="btn btn-success">
-                      Submit
-                    </button>
-                  </form>
-                </div>
+                {this.state.Data ? (
+                  <div className="card-body">
+                    <h5 className="card-title">Successfully Signed In</h5>
+                    <p className="text-muted">
+                      Hello {this.state.Data.Username}! How are you?
+                    </p>
+                    <p className="mb-0">
+                      You might want to{" "}
+                      <button
+                        className="btn btn-link"
+                        onClick={e => {
+                          e.preventDefault();
+                          this.setState({ Response: null, Data: null });
+                        }}
+                      >
+                        sign out
+                      </button>
+                      .
+                    </p>
+                  </div>
+                ) : (
+                  <div className="card-body">
+                    <h5 className="card-title">Sign In</h5>
+                    <h6 className="card-subtitle mb-2 text-muted">
+                      Please sign in to continue.
+                    </h6>
+                    <form onSubmit={this.handleSubmit}>
+                      {["Username", "Password"].map((i, k) => (
+                        <div className="form-group" key={k}>
+                          <label htmlFor={i}>{i}</label>
+                          <input
+                            type={i === "Password" ? "password" : "text"}
+                            name={i}
+                            className="form-control"
+                            id={i}
+                            placeholder={i}
+                            value={this.state[i]}
+                            onChange={this.handleChange}
+                          />
+                        </div>
+                      ))}
+                      <button type="submit" className="btn btn-success">
+                        Submit
+                      </button>
+                    </form>
+                  </div>
+                )}
               </div>
             </div>
             <div className="col-6">

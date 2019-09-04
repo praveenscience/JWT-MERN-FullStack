@@ -13,6 +13,12 @@
         background-color: #fff;
         border-top: 1px solid rgba(#000, 0.125);
       }
+      .btn {
+        &-link {
+          padding: 0;
+          vertical-align: baseline;
+        }
+      }
     }
   }
 }
