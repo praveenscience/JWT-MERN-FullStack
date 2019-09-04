@@ -1,6 +1,7 @@
 const express = require("express");
 const morgan = require("morgan");
 const { GenerateJWT, DecodeJWT, ValidateJWT } = require("./dec-enc.js");
+const Users = require("./users");
 
 const app = express();
 app.use(express.json());
@@ -31,7 +32,27 @@ app.post("/api/ValidateJWT", (req, res) => {
 });
 
 app.post("/api/Users/SignIn", (req, res) => {
-  res.json(req.body);
+  // Check if the Username is present in the database.
+  if (typeof Users[req.body.Username] !== "undefined") {
+    // Check if the password is right.
+    if (Users[req.body.Username] === req.body.Password) {
+      // Send a success message.
+      // By default, the status code will be 200.
+      res.json({
+        Message: "Successfully Signed In!"
+      });
+    } else {
+      // Send a forbidden error if incorrect credentials.
+      res.status(403).json({
+        Message: "Invalid Username or Password!"
+      });
+    }
+  } else {
+    // Send a forbidden error if invalid username.
+    res.status(403).json({
+      Message: "User Not Found!"
+    });
+  }
 });
 
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
