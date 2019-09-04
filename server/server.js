@@ -32,14 +32,27 @@ app.post("/api/ValidateJWT", (req, res) => {
 });
 
 app.post("/api/Users/SignIn", (req, res) => {
+  const { Username, Password } = req.body;
   // Check if the Username is present in the database.
-  if (typeof Users[req.body.Username] !== "undefined") {
+  if (typeof Users[Username] !== "undefined") {
     // Check if the password is right.
-    if (Users[req.body.Username] === req.body.Password) {
+    if (Users[Username] === Password) {
+      // Let's create a JWT based on our default headers.
+      const header = {
+        alg: "HS512",
+        typ: "JWT"
+      };
+      // Now we need to make the claims based on Username provided by the user.
+      const claims = {
+        Username
+      };
+      // Finally, we need to have the key saved on the server side.
+      const key = "$PraveenIsAwesome!";
       // Send a success message.
       // By default, the status code will be 200.
       res.json({
-        Message: "Successfully Signed In!"
+        Message: "Successfully Signed In!",
+        JWT: GenerateJWT(header, claims, key)
       });
     } else {
       // Send a forbidden error if incorrect credentials.
