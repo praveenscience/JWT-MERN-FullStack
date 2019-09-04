@@ -40,12 +40,12 @@ class Login extends Component {
     };
     GenerateJWT(header, claims, null, res => {
       if (res.status === 200) {
-        this.setState({ Response: res.data }, () => {
+        this.setState({ Error: null, Response: res.data }, () => {
           if (typeof Storage !== "undefined") {
             localStorage.setItem("JWT", res.data);
           }
           DecodeJWT(this.state.Response, data =>
-            this.setState({ Data: data.data })
+            this.setState({ Error: null, Data: data.data })
           );
         });
       } else {
