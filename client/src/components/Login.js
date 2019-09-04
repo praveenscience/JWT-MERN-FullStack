@@ -22,6 +22,14 @@ class Login extends Component {
     // Here, we can also call the function that sends a request to the server.
     // Get the username and password from the state.
     const { Username, Password } = this.state;
+    // Right now it even allows empty submissions.
+    // At least we shouldn't allow empty submission.
+    if (Username.trim().length < 3 || Password.trim().length < 3) {
+      // If either of Username or Password is empty, set an error state.
+      this.setState({ Error: "You have to enter both username and password." });
+      // Stop proceeding.
+      return false;
+    }
     const claims = {
       Username,
       Password
@@ -98,6 +106,11 @@ class Login extends Component {
                       Please sign in to continue.
                     </h6>
                     <form onSubmit={this.handleSubmit}>
+                      {this.state.Error && (
+                        <div className="alert alert-danger text-center">
+                          <p className="m-0">{this.state.Error}</p>
+                        </div>
+                      )}
                       {["Username", "Password"].map((i, k) => (
                         <div className="form-group" key={k}>
                           <label htmlFor={i}>{i}</label>
