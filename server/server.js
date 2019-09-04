@@ -30,4 +30,8 @@ app.post("/api/ValidateJWT", (req, res) => {
   res.json(ValidateJWT(header, token, key));
 });
 
+app.post("/api/Users/SignIn", (req, res) => {
+  res.json(req.body);
+});
+
 app.listen(port, () => console.log(`Server listening on port ${port}!`));
