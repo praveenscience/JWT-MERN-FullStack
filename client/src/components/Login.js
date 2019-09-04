@@ -45,6 +45,16 @@ class Login extends Component {
       }
     });
   };
+  SignOutUser = e => {
+    e.preventDefault();
+    this.setState({ Response: null, Data: null });
+    if (typeof Storage !== "undefined") {
+      // When this component loads, check if JWT is already saved in the local storage.
+      if (localStorage.getItem("JWT") !== null) {
+        localStorage.removeItem("JWT");
+      }
+    }
+  };
   componentDidMount() {
     if (typeof Storage !== "undefined") {
       // When this component loads, check if JWT is already saved in the local storage.
@@ -74,10 +84,7 @@ class Login extends Component {
                       You might want to{" "}
                       <button
                         className="btn btn-link"
-                        onClick={e => {
-                          e.preventDefault();
-                          this.setState({ Response: null, Data: null });
-                        }}
+                        onClick={this.SignOutUser}
                       >
                         sign out
                       </button>
