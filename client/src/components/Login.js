@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { GenerateJWT, DecodeJWT } from "../services/JWTService";
+import { DecodeJWT } from "../services/JWTService";
+import { AuthUser } from "../services/AuthService";
 
 class Login extends Component {
   state = {
@@ -30,26 +31,18 @@ class Login extends Component {
       // Stop proceeding.
       return false;
     }
-    const claims = {
-      Username,
-      Password
-    };
-    const header = {
-      alg: "HS512",
-      typ: "JWT"
-    };
-    GenerateJWT(header, claims, null, res => {
-      if (res.status === 200) {
-        this.setState({ Error: null, Response: res.data }, () => {
-          if (typeof Storage !== "undefined") {
-            localStorage.setItem("JWT", res.data);
-          }
-          DecodeJWT(this.state.Response, data =>
-            this.setState({ Error: null, Data: data.data })
-          );
-        });
+    // Call the authentication service from front end.
+    AuthUser(Username, Password, (res, err) => {
+      // If the request was an error, add an error state.
+      if (err) {
+        this.setState({ Error: res.response.data.Message });
       } else {
-        this.setState({ Response: "Error!" });
+        // If there's no errors, further check if it's 200.
+        if (res.status === 200) {
+          // We need a JWT to be returned from the server.
+          // As it stands, it doesn't currently return the JWT, as it's dummy.
+          // Let's work on the server side part now to make it return the JWT.
+        }
       }
     });
   };
@@ -164,6 +157,16 @@ class Login extends Component {
                     <br />
                     <br />
                     {JSON.stringify(this.state.Data, null, 2)}
+                  </>
+                )}
+                {this.state.Error && (
+                  <>
+                    <br />
+                    <br />
+                    Error
+                    <br />
+                    <br />
+                    {JSON.stringify(this.state.Error, null, 2)}
                   </>
                 )}
               </pre>
