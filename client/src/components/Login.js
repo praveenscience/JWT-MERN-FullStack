@@ -45,6 +45,18 @@ class Login extends Component {
       }
     });
   };
+  componentDidMount() {
+    if (typeof Storage !== "undefined") {
+      // When this component loads, check if JWT is already saved in the local storage.
+      if (localStorage.getItem("JWT") !== null) {
+        // If there's something, try to parse and sign the current user in.
+        this.setState({ Response: localStorage.getItem("JWT") });
+        DecodeJWT(localStorage.getItem("JWT"), data =>
+          this.setState({ Data: data.data })
+        );
+      }
+    }
+  }
   render() {
     return (
       <div className="login">
