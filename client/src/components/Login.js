@@ -39,6 +39,8 @@ class Login extends Component {
       } else {
         // If there's no errors, further check if it's 200.
         if (res.status === 200) {
+          // Since there aren't any errors, we should remove the error text.
+          this.setState({ Error: null });
           // We need a JWT to be returned from the server.
           // The res.data holds both Message and JWT. We need the JWT.
           // Decode the JWT and store it in the state.
@@ -59,8 +61,12 @@ class Login extends Component {
   SignOutUser = e => {
     // Prevent the default event of reloading the page.
     e.preventDefault();
-    // Clear the errors.
-    this.setState({ Response: null, Data: null });
+    // Clear the errors and other data.
+    this.setState({
+      Error: null,
+      Response: null,
+      Data: null
+    });
     // Check if localstorage support is there.
     if (typeof Storage !== "undefined") {
       // Check if JWT is already saved in the local storage.
