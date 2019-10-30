@@ -9,6 +9,7 @@ This repository contains the step by step procedure based on the commits to buil
 * [Creating a full-stack MERN app using JWT authentication: Part 1](https://blog.logrocket.com/mern-app-jwt-authentication-part-1/)
 * [Creating a full-stack MERN app using JWT authentication: Part 2](https://blog.logrocket.com/mern-app-jwt-authentication-part-2/)
 * [Creating a full-stack MERN app using JWT authentication: Part 3](https://blog.logrocket.com/mern-app-jwt-authentication-part-3/)
+* [Creating a full-stack MERN app using JWT authentication: Part 4](https://blog.logrocket.com/mern-app-jwt-authentication-part-4/)
 
 ## Requirements
 
