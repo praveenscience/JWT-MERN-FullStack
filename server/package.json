@@ -22,7 +22,7 @@
   "homepage": "https://github.com/praveenscience/JWT-MERN-FullStack#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "jsrsasign": "^8.0.12",
+    "jsrsasign": "^10.2.0",
     "morgan": "^1.9.1",
     "nodemon": "^1.19.1"
   }
